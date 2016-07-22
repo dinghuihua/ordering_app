@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>订单确认</title>
+		<meta content="telephone=no" name="format-detection">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="on" http-equiv="cleartype">
+
+		<link rel="stylesheet" type="text/css" href="assets/css/1reset.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/2layout.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+
+	</head>
+	<style>
+		* {
+			margin: 0 auto;
+		}
+		
+		#oc_main {
+			width: 100%;
+			height: 100%;
+		}
+		
+		.oc_addr {
+			width: 97%;
+			background-color: #fff;
+			margin: 0 auto;
+			padding: 2% 10px;
+			/*margin-top: 5px;*/
+			border-bottom: 1px solid #f0f0f0;
+		}
+		
+		.oc_addr p {
+			font-weight: bold;
+		}
+		
+		.oc_userName {
+			font-size: 1rem;
+		}
+		
+		.oc_tel {
+			padding-left: 1.5rem;
+		}
+		
+		.oc_tel,
+		.oc_userAddr {
+			font-size: 0.88rem;
+			color: #646464;
+		}
+		
+		.oc_userAddr {
+			margin-top: 0.3rem;
+		}
+		
+		.oc_addr p:nth-child(1) {
+			line-height: 1.5rem;
+		}
+		
+		.oc_addr i {
+			width: 0.6rem;
+			height: 1.06rem;
+			background: url(assets/images/om_left.png) no-repeat;
+			background-size: 100%;
+			display: block;
+			position: absolute;
+			right: 1.25rem;
+			top: 1.96rem;
+		}
+		
+		.oc_orderDetail {
+			width: 97%;
+			background-color: #fff;
+			margin: 0 auto;
+		}
+		
+		.oc_label {
+			margin-left: 4%;
+			margin-top: 0.625rem;
+			width: 4.38rem;
+			background-color: #fff;
+			height: 1.88rem;
+			line-height: 1.88rem;
+			text-align: center;
+			font-size: 0.88rem;
+			color: #969696;
+			border-bottom: 1px solid #f0f0f0;
+		}
+		
+		.oc_food {
+			overflow: hidden;
+			padding: 10px 8px;
+		}
+		
+		.oc_food dt {
+			width: 4.38rem;
+			height: 4rem;
+			margin-right: 10px;
+			padding: 0.31rem 0;
+		}
+		
+		.oc_food dt img {
+			border: 1px solid #d9d9d9;
+			width: 100%;
+			height: 100%;
+		}
+		
+		.oc_food dl {
+			overflow: hidden;
+			border-bottom: 1px solid #f0f0f0;
+		}
+		
+		.oc_food dl dd {
+			/*height: 50px;
+			line-height: 50px;*/
+			margin-top: 6%;
+			width: 70%;
+		}
+		
+		.oc_food dl dd p {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		
+		.oc_food dl dd p:nth-child(1) {
+			width: 62%;
+		}
+		
+		.oc_food dl dd p:nth-child(3) {
+			text-align: right;
+		}
+		
+		.oc_cost {
+			width: 97%;
+			background-color: #fff;
+			margin: 0 auto;
+			padding: 0 10px;
+			margin-bottom: 4rem;
+		}
+		
+		.oc_tar {
+			text-align: right;
+		}
+		
+		.oc_cost ul li {
+			width: 100%;
+			line-height: 2rem;
+			overflow: hidden;
+			border-bottom: 1px dashed #c8c8c8;
+			font-size: 0.88rem;
+		}
+		
+		.oc_cost ul li:last-child {
+			border: none;
+			padding-bottom: 10px;
+		}
+		
+		.oc_btn {
+			width: 92%;
+			height: 2.81rem;
+			line-height: 2.81rem;
+			text-align: center;
+			/*margin: 20px auto;*/
+			border: none;
+			display: block;
+			font-size: 1.3rem;
+			margin: 0.2rem auto;
+		}
+		
+		.oc_nbtn{
+			background: #b7b7b7;
+			color: #fff;
+		}
+		
+		.oc_ybtn{
+			background: #1eb428;
+			color: #fff;
+		}
+		
+		.oc_btn_div {
+			width: 100%;
+			height: 3.3rem;
+			line-height: 3.3rem;
+			background: #fff;
+			position: fixed;
+			bottom: 0;
+			border-top: 1px solid #f0f0f0;
+		}
+		
+		.oc_sendTime {
+			width: 97%;
+			background-color: #fff;
+			margin: 0 auto;
+			overflow: hidden;
+			padding: 0.625rem 10px;
+		}
+		
+		.oc_time {
+			text-align: left;
+			width: 7rem;
+			height: 1.88rem;
+			line-height: 1.88rem;
+			text-align: center;
+			margin-left: 4%;
+			font-size: 0.75rem;
+			color: #999999;
+			/*background: url(assets/images/select.jpg) no-repeat;
+			background-size: 100%;*/
+		}
+		
+		#oc_time {
+			background: rgba(0, 0, 0, 0);
+			border: 0;
+			border-radius: 0;
+			height: 1.88rem;
+			width: 100%;
+			background: url(assets/images/select.jpg) no-repeat;
+			background-size: 100%;
+		}
+		
+		.oc_estimate {
+			color: #c8c8c8;
+			font-size: 0.69rem;
+		}
+		
+		.oc_sendTime p {
+			padding-top: 0.5rem;
+			margin-left: 2px;
+		}
+		
+		.oc_next {
+			width: 3.43rem;
+			border: 1px solid #dcdcdc;
+			height: 1.88rem;
+			background: url(assets/images/oc_next.jpg) no-repeat;
+			background-size: 100%;
+		}
+		
+		.oc_dpn {
+			display: none;
+		}
+		
+		.oc_foodNum {
+			margin-right: 5%;
+		}
+		
+		.oc_remarks {
+			padding: 10px 5px;
+			width: 97%;
+			margin: 0 auto;
+		}
+		
+		.oc_remarks p {
+			color: #c8c8c8;
+		}
+		
+		.oc_remarks textarea {
+			width: 98%;
+			height: 3rem;
+			margin-top: 5px;
+			border: 2px solid #dcdcdc;
+			border-radius: 0;
+			overflow: auto;
+			background-attachment: fixed;
+			background-repeat: no-repeat;
+		}
+		
+		.oc_shadow {
+			width: 100%;
+			height: 100%;
+			background: rgba(1, 1, 1, 0.5);
+			position: absolute;
+		}
+		
+		.oc_cost_coupon {
+			color: #eb3c3c;
+		}
+		
+		.toChooseCoupon span {
+			float: left;
+		}
+		
+		.toChooseCoupon i {
+			width: 0.6rem;
+			height: 1.06rem;
+			background: url(assets/images/om_left.png) no-repeat;
+			background-size: 100%;
+			display: inline;
+			float: right;
+			margin-top: 0.47rem;
+			margin-left: 0.47rem;
+		}
+		.load_div{
+			position: absolute;
+			top: 40%;
+			left: 50%;
+		}
+		@media only screen and (min-width: 320px) and (max-width: 480px) {
+			html {
+				font-size: 17px;
+			}
+		}
+		.errorMsg {
+			color: red;
+		}
+	</style>
+
+	<body ng-app="orderApp" ng-controller="orderController" n>
+		<form name="orderForm">
+		<div id="oc_main">
+			<div class="oc_addr" ng-click="toaddrManage()">
+				<a href="#">
+					<p><span class="oc_userName" ng-bind="address.contactor"></span>
+						<span class="oc_tel" ng-bind="address.phone"></span>
+					</p>
+					<p class="oc_userAddr" ng-bind="address.address+address.doorplate"></p>
+					<i></i>
+				</a>
+			</div>
+			<div class="oc_sendTime">
+				<p class="fl">送餐时间:</p>
+				<div class="fl oc_time">
+					<!--到达时间arrive_time()  比 下单时间(order_time) 多1个小时-->
+					<select id="oc_time" ng-model="order.arrive_time" name='arriveTime' ng-required="true">
+						<option value="">未选择</option>
+						<option value="{{time.value}}" ng-repeat="time in times" ng-bind="time.timeText"></option>
+					</select>
+				</div>
+				<p class="fl oc_estimate">预计1小时后送达</p>
+			</div>
+			<div ng-show="orderForm.arriveTime.$dirty&&orderForm.arriveTime.$invalid"
+				 ng-messages="orderForm.arriveTime.$error" ng-class="'oc_sendTime errorMsg'">
+				<span ng-message="required" ng-bind="'必须指定送达时间'"></span>
+			</div>
+			<div class="oc_label">订单明细</div>
+			<div class="oc_orderDetail">
+				<div class="oc_food">
+					<dl ng-repeat="meal in cart.meals">
+						<dt class="fl">
+							<img ng-src="{{meal.picture}}" />
+						</dt>
+						<dd class="fl">
+							<p class="oc_foodName fl" ng-bind="meal.mealName"></p>
+							<p class="oc_foodPric fr" ng-bind="meal.price+'元'"></p>
+							<p class="oc_foodNum fr" ng-bind="'X'+ meal.count"></p>
+						</dd>
+					</dl>
+				</div>
+
+				<div class="oc_remarks">
+					<p>备注</p>
+					<textarea class="oc_remark" ng-model="order.remark"></textarea>
+				</div>
+			</div>
+			<div class="oc_label">费用小计</div>
+			<div class="oc_cost">
+				<ul>
+					<li>
+						<span class="fl">配送费用</span>
+						<span class="fr oc_delivery" ng-bind="'￥'+ cart.songcanfei">0/span>
+					</li>
+ 					<li>
+						<span class="fl">费用合计</span>
+						<span class="fr oc_total" ng-bind="'￥'+ (cart.totalPrice + cart.songcanfei)"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="oc_btn_div">
+				<button class="oc_btn oc_ybtn btn" href="javascript:" ng-click="submit()">微信支付</button>
+			</div>
+			<div class="load_div oc_dpn">
+				<img src="assets/images/load.gif" />
+			</div>
+		</div>
+		</form>
+	</body>
+	<script type="text/javascript" src="assets/js/angular/angular-1.5.5.js"></script>
+	<script type="text/javascript" src="assets/js/angular/angular-messages.js"></script>
+<script type="text/javascript">
+	angular.module('orderApp', ['ngMessages'])
+			.controller('orderController', function ($scope, $http) {
+				//检查session中是否登录  --> to login
+				var userJson = sessionStorage.getItem('_user_');
+				if(userJson == null){
+					alert('请先登录!');
+					window.location = 'login.html';
+					return;
+				}else{
+					$scope.user = JSON.parse(userJson);
+				}
+
+				//检查session中是否有购物车 --> to index
+				var cartJson = sessionStorage.getItem('_cart_');
+				if (cartJson == null){
+					alert('当前购物车中没有商品');
+					window.location = 'index.html';
+					return;
+				}else{
+					$scope.cart = JSON.parse(cartJson);
+				}
+
+				//检查session中是否有地址
+				var addressJson = sessionStorage.getItem('_address_');
+				//==> 如果没有, ajax请求获取对应的地址
+				if (addressJson == null){
+					$http.get('/order/getNewestAddress?userId='+ $scope.user._id)
+							.success(function (result) {
+								//如果没有地址
+								if (result.code == 1){ //获取不到 --> to addNewAddr
+									alert('当前还没有收货地址,请先添加!');
+									window.location = 'addNewAddr.html';
+									return;
+								}
+
+								//有地址  保存到session
+								sessionStorage.setItem('_address_', JSON.stringify(result.data));
+
+								$scope.address = result.data;
+							})
+							.error(function (result) {
+								alert(result);
+							});
+				}else {
+					$scope.address = JSON.parse(addressJson);
+				}
+				
+				
+				//确认支付
+				$scope.submit = function () {
+					//1. 收集订单数据
+					$scope.order.user_id = $scope.user._id;
+					$scope.order.contactor = $scope.address.contactor;
+					$scope.order.address = $scope.address.address;
+					$scope.order.phone = $scope.address.phone;
+					$scope.order.doorplate = $scope.address.doorplate;
+					$scope.order.total_money = $scope.cart.totalPrice;
+					$scope.order.peisongfei =  $scope.cart.songcanfei;
+					var detail = {
+						data: {
+							rstId: $scope.cart.rstId,
+							money: $scope.order.total_money + $scope.order.peisongfei,
+							meals: $scope.cart.meals
+						}
+					};
+					$scope.order.detail = JSON.stringify(detail);
+					//发送下单的Ajax请求
+					$http({
+						method: 'POST',
+						url: '/order/createOrder',
+						data: {order: $scope.order}
+					})
+							.success(function (result) {
+								alert('支付成功!');
+								//提交订单完成后, 删除session中的order和address数据
+								sessionStorage.removeItem('_cart_');
+								sessionStorage.removeItem('_address_');
+
+								//result.data得到order订单对象
+								window.location = '/order/detail'+result.data._id;
+							})
+							.error(function (result) {
+								alert(result);
+							});
+				};
+
+				initTimes();
+				//初始化时间列表
+				function initTimes() {
+					/*<option value="2016-7-1 12:01">立即送达</option>
+					 <option value="2016-7-1 12:16">11:16</option>
+					 <option value="2016-7-1 12:31">11:31</option>*/
+					$scope.times = [];
+					/*$scope.times.push({
+						value: '2016-7-1 12:01',
+						timeText: '立即送达'
+					})*/
+					var date = new Date();
+					var year = date.getFullYear();
+					var month = date.getMonth()+1; //月份默认是从0开始的
+					var day = date.getDate();
+					var hour = date.getHours();
+					var minute = date.getMinutes();
+
+					//保存下当前时间
+					$scope.times.push({
+						//送达时间
+						value: year+'-'+month+'-'+day+'-'+' '+(hour+1)+':'+minute,
+						timeText : '立即送达'
+					});
+					// 设置间隔时间 15分钟
+					var intervalTime = 15;
+
+					//目标时间  从1970.1.1 0:0:0 到当天20点 的时间点
+					var lastTime = new Date(year+'-'+month+'-'+day+' 20:00').getTime();
+					//当前时间
+					var currentTime = date.getTime();//1970.1.1 0:0:0 到当前时间的时间点
+					//计算遍历的次数(即 下拉列表显示的条数)
+					var count = (lastTime-currentTime)/(intervalTime*1000*60);
+					for(var i=0; i<count; i++){
+						minute += intervalTime;
+						if(minute>=60){
+							hour++;
+							minute -= 60;
+						}
+						$scope.times.push({
+							value: year+'-'+month+'-'+day+'-'+' '+(hour+1)+':'+minute,
+							timeText: (hour<10 ? ('0'+hour) : hour) + ':' + (minute<10 ? ('0'+minute) : minute)
+						});
+					}
+				}
+
+				$scope.toaddrManage = function () {
+					window.location = 'addrManage.html';
+				}
+			});
+</script>
+</html>

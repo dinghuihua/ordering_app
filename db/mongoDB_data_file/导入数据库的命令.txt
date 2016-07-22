@@ -1,0 +1,7 @@
+mongoimport --db atguigu_o2o --collection addresses --drop --file addresses.json
+mongoimport --db atguigu_o2o --collection feedbacks --drop --file feedbacks.json
+mongoimport --db atguigu_o2o --collection index_banners --drop --file index_banners.json
+mongoimport --db atguigu_o2o --collection meals --drop --file meals.json
+mongoimport --db atguigu_o2o --collection orders --drop --file orders.json
+mongoimport --db atguigu_o2o --collection users --drop --file users.json
+

@@ -1,0 +1,21 @@
+{
+  "_id": {
+    "$oid": "575f7085f8a14116283dab9e"
+  },
+  "group_id": 0,
+  "groupName": "",
+  "mealCode": "",
+  "mealType": "1",
+  "mealName": "熏鸡肉沙拉",
+  "price": "23",
+  "originalPrice": "28",
+  "picture": "/assets/images/img/1.png",
+  "instruction": null,
+  "sales": "256",
+  "state": null
+}
+{ "_id" : { "$oid" : "575f7085f8a14116283dab9f" }, "group_id" : 1, "groupName" : null, "mealCode" : null, "mealType" : "1", "mealName" : "吞拿鱼沙拉", "price" : "21", "originalPrice" : "25", "picture" : "/assets/images/img/2.png", "instruction" : null, "sales" : "236", "state" : null }
+{ "_id" : { "$oid" : "575f7085f8a14116283daba0" }, "group_id" : 2, "groupName" : "", "mealCode" : null, "mealType" : "1", "mealName" : "藜麦牛油果沙拉", "price" : "23", "originalPrice" : "25", "picture" : "/assets/images/img/3.png", "instruction" : null, "sales" : "366", "state" : null }
+{ "_id" : { "$oid" : "575f7085f8a14116283daba1" }, "group_id" : 1, "groupName" : null, "mealCode" : null, "mealType" : "1", "mealName" : "三文鱼沙拉", "price" : "30", "originalPrice" : "33", "picture" : "/assets/images/img/4.png", "instruction" : null, "sales" : "566", "state" : null }
+{ "_id" : { "$oid" : "575f7085f8a14116283daba2" }, "group_id" : 1, "groupName" : null, "mealCode" : null, "mealType" : "1", "mealName" : "牛油果三文鱼沙拉", "price" : "33", "originalPrice" : "36", "picture" : "/assets/images/img/5.png", "instruction" : null, "sales" : "266", "state" : null }
+{ "_id" : { "$oid" : "575f7085f8a14116283daba3" }, "group_id" : 1, "groupName" : null, "mealCode" : null, "mealType" : "1", "mealName" : "黑椒牛肉沙拉", "price" : "38", "originalPrice" : "40", "picture" : "/assets/images/img/6.png", "instruction" : null, "sales" : "452", "state" : null }

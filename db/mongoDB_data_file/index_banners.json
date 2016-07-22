@@ -1,0 +1,10 @@
+{
+  "_id": {
+    "$oid": "575f7085f8a14116283dab9c"
+  },
+  "img_src": "/assets/images/img/bar1.jpg",
+  "link": null,
+  "sort": true
+}
+{ "_id" : { "$oid" : "575f7085f8a14116283dab9d" }, "img_src" : "/assets/images/img/bar2.jpg", "link" : null, "sort" : false }
+{ "_id" : { "$oid" : "575f7085f8a14116283dab9b" }, "img_src" : "/assets/images/img/bar3.jpg", "link" : null, "sort" : false }

@@ -1,0 +1,30 @@
+{
+  "_id": {
+    "$oid": "575f7085f8a14116283dab96"
+  },
+  "address": "北京大学-26号楼",
+  "contactor": "张三",
+  "lat": "39.993851111808",
+  "lng": "116.31838249961 ",
+  "phone": "17711111111",
+  "sex": "1",
+  "state": "1",
+  "userId": "575f7085f8a14116283dabc7",
+  "cityId": "113",
+  "doorplate": "212"
+}
+{ "_id" : { "$oid" : "575f7085f8a14116283dab97" }, "address" : "北京大学-燕园培训中心", "contactor" : "eee", "lat" : "39.99292522366591", "lng" : "116.31237283574812 ", "phone" : "13111111111", "sex" : "1", "state" : "1", "userId" : "575f7085f8a14116283dabc8", "cityId" : "113", "doorplate" : "11111" }
+{ "_id" : { "$oid" : "575f7085f8a14116283dab98" }, "address" : "北京大学-40号楼", "contactor" : "123", "lat" : "39.99263501731565", "lng" : "116.31455571813736 ", "phone" : "13111111111", "sex" : "1", "state" : "1", "userId" : "575f7085f8a14116283dabc4", "cityId" : "113", "doorplate" : "1213" }
+{ "_id" : { "$oid" : "575f7085f8a14116283dab99" }, "address" : "北京资源宾馆", "contactor" : "we", "lat" : "39.992876856027", "lng" : "116.31230097131 ", "phone" : "13121121212", "sex" : "1", "state" : "1", "userId" : "575f7085f8a14116283dabc4", "cityId" : null, "doorplate" : "sdfsfs" }
+{ "_id" : { "$oid" : "575f7085f8a14116283dab9a" }, "address" : "北京资源燕园宾馆写字楼", "contactor" : "ss", "lat" : "39.99313942279384", "lng" : "116.31236385269301 ", "phone" : "13100000000", "sex" : "1", "state" : "1", "userId" : "575f7085f8a14116283dabc3", "cityId" : "113", "doorplate" : "eede" }
+
+address: '燕园大厦',
+phone: '12312312323',
+sex: '1',
+contactor: '张小三',
+cityId: '113',
+lng: '116.32187690804368',
+lat: '39.99361618616385',
+userId: '576b8e09ab5819e429073381',
+_id: 576baeafb59708b81c0da245,
+doorplate: '212'}

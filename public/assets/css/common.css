@@ -1,0 +1,174 @@
+
+body{
+	background: #f0f0f0;
+	-webkit-touch-callout:none;
+	-webkit-user-select:none;
+	-khtml-user-select:none;
+	-moz-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+.wrap{
+	width: 100%;
+}
+
+
+/* module: 文本 */
+
+.tl {
+	text-align: left;
+}
+
+.tr {
+	text-align: right;
+}
+
+.tc {
+	text-align: center;
+}
+
+.t-money {
+	color: #d73037;
+}
+
+.t-impt {
+	color: #d73037;
+}
+
+.t-tips {
+	font-size: 0.75rem;
+	color: #999;
+}
+
+.t-ddd {
+	color: #ddd;
+}
+
+.lh0 {
+	line-height: 0;
+}
+
+.lh12 {
+	line-height: 120%;
+}
+
+.lh15 {
+	line-height: 150%;
+}
+
+.f200 {
+	font-size: 2rem;
+}
+
+.f150 {
+	font-size: 1.5rem;
+}
+
+.f120 {
+	font-size: 1.2rem;
+}
+
+.f14 {
+	font-size: 1rem;
+}
+
+.f12 {
+	font-size: 0.8rem;
+}
+
+.f18 {
+	font-size: 18px;
+}
+
+.fb {
+	font-weight: bold;
+}
+
+.vb {
+	vertical-align: middle;
+}
+
+.vt {
+	vertical-align: top;
+}
+
+
+/* module: 超链接 */
+
+a {
+	color:#414141;	
+	text-decoration: none;
+}
+
+a:link {
+	color: #414141;
+}
+
+a:visited {
+	color: #414141;
+}
+
+/* 导航箭头 */
+.nav-left{
+  display: inline-block;
+    background-image: url('../images/nav_left.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 10px;
+    vertical-align: middle;
+}
+
+.btn{
+	border-radius: 2px;
+}
+.clearfix {
+  clear: both;
+}
+ 
+ *{ -webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-tap-highlight-color: transparent; /* For some Androids */ }
+html[xmlns] .clearfix {
+  display: block;
+}
+* html .clearfix {
+  height: 1%;
+}
+
+.table{
+	
+	display: table;
+}
+.cell{
+	display: table-cell;
+	vertical-align: middle;
+}
+@media only screen and  (max-width: 320px) {
+	html{ 
+       font-size: 12px;
+    }
+
+    .meals .price s {
+		display: none;
+    }
+
+}
+
+@media only screen and  (min-width: 320px) and  (max-width: 480px) {
+	html{ 
+       font-size: 16px;
+    }
+	
+	/* 首页 */
+}
+
+/*@media only screen and (min-width: 480px) and (max-width:720px) { 
+    html{ 
+       font-size: 14px;
+    }
+}*/
+@media only screen and (max-device-width: 640px), only screen and (max-device-width: 667px), only screen and (max-width: 480px){ 
+    /*iPhone 6 and iPhone 6+ portrait and landscape*/
+    html{ 
+       font-size: 16px;
+    }
+}

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>订单详情</title>
+		<meta content="telephone=no" name="format-detection">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="on" http-equiv="cleartype">
+		<link rel="stylesheet" type="text/css" href="assets/css/1reset.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/2layout.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+		<style>
+			#od_main{
+				width: 100%;
+				height: 100%;
+			}
+			.od_schedule{
+				width: 97%;
+				margin: 0 auto;
+				overflow: hidden;
+				background-color: #fff;
+			}
+			.od_schedule_top{
+				width: 100%;
+				overflow: hidden;
+				padding:22px 25%;
+				border-bottom: 1px solid #f0f0f0;
+			}
+			.od_schedule_top dl{
+				
+			}
+			.od_schedule_top dt{
+				margin: 0 auto;
+				width: 2.5rem;
+				height: 2.81rem;
+				/*background: url(assets/images/od_schedule.png) no-repeat;
+				background-size: 100%;*/
+				margin-right: 13px;
+			}
+			.od_business{
+				font-size: 1.25rem;
+				line-height: 1.93rem;
+			}
+			.od_time{
+				font-size: 0.75rem;
+				color: #969696;
+			}
+			.od_time span{
+				color: #000;
+			}
+			.od_schedule_bottom{
+				width: 100%;
+				padding: 25px 0;
+				position: relative;
+			}
+			.od_schedule_line{
+				width: 65%;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			.od_bgr{
+				background: #eb3c3c;
+			}
+			.od_bgg{
+				background: #c7c7c7;
+			}
+			.od_schedule_line div{
+				width: 50%;
+				height: 0.13rem;
+			}
+			.od_schedule_font{
+				
+				text-align: center;
+			}
+			.od_schedule_font ul{
+				margin: 0 auto;
+				margin-bottom: 7px;
+			}
+			.od_schedule_font ul li{
+				display: table-cell;
+				width: 20rem;
+				text-align: center;
+			}
+			.od_schedule_line span{
+				position: absolute;
+				bottom: 25%;
+			}
+			.od_schedule_line span:nth-child(1){
+				left: 15%;
+			}
+			.od_schedule_line span:nth-child(2){
+				left: 49%;
+			}
+			.od_schedule_line span:nth-child(3){
+				left: 81%;
+			}
+			.od_schedule_line span,i{
+				display: inline-block;
+			}
+			.od_schedule_line i{
+				width: 0.56rem;
+				height: 0.56rem;
+				display: inline-block;
+				border-radius: 50%;
+			}
+			.od_schedule_y{
+				border:2px solid #eb3c3c;
+				width: 0.94rem;
+				height: 0.94rem;
+				line-height: 0.63rem;
+				text-align: center;
+				border-radius: 50%;
+			}
+			.od_detail{
+				width: 97%;
+				margin: 0 auto;
+				margin-top: 15px;
+				background-color: #fff;
+				position: relative;
+				margin-bottom: 3.2rem;
+				
+			}
+			.od_detail_top{
+				padding-left: 15px;
+				overflow: hidden;
+				width: 100%;
+				padding-top: 30px;
+			}
+			.od_detail_top .od_foodPic{
+				width: 20%;
+				height: 3.7rem;
+			}
+			.od_foodDetail p:nth-child(1){
+				width: 68%;
+			}
+			.od_detail_top .od_foodPic img{
+				border:1px solid #d9d9d9;
+			}
+			.od_foodDetail{
+				width: 74%;
+				margin-left: 10px;
+				margin-top: 2%;
+				margin-bottom: 3.5rem;
+			}
+			.od_detail_mid{
+				font-size: 0.88rem;
+				color: #333333;
+				border-bottom: 1px solid #f0f0f0;
+			}
+			.od_detail_mid ul{
+				width: 95%;
+				overflow: hidden;
+				margin: 0 auto;
+				margin-top: 10px;
+			}
+			.od_detail_mid ul:first-child{
+				border-top: 1px dashed #d9d9d9;
+			}
+			.od_detail_mid ul li{
+				overflow: hidden;
+				height: 1.88rem;
+				line-height: 1.88rem;
+				border-bottom: 1px dashed #d9d9d9;
+				padding-left: 10px;
+			}
+			.od_noborder{
+				border-bottom: none !important;
+			}
+			.od_detail_bottom{
+				margin: 9px;
+				font-size: 0.88rem;
+				padding-left: 10px;
+			}
+			.od_detail_bottom p{
+				line-height: 24px;
+				color: #333333;
+			}
+			.od_label{
+				position: absolute;
+				width: 4.5rem;
+				height: 1.88rem;
+				background: #eb3c3c;
+				line-height: 30px;
+				text-align: center;
+				color: #fff;
+				top:-5px;
+			}
+			.od_meal_detail{
+				overflow: hidden;
+			}
+			
+			.od_footer{
+				width: 100%;
+				height: 3.125rem;
+				line-height: 3.125rem;
+				background: #fff;
+				position: fixed;
+				bottom: 0;
+				padding: 0 0.625rem 0 1.25rem ;
+			}
+			.od_footer div{
+				display: inline-block;
+				margin-top:0.43rem;
+			}
+			.od_tel{
+				width: 2.25rem;
+				height: 2.25rem;
+			}
+			.od_backOrder{
+				width: 2.25rem;
+				height: 2.25rem;
+				line-height: 2.25rem;
+				text-align: center;
+				color:#000;
+				border-radius: 50%;
+				border:1px solid #646464;
+				margin-left: 1rem;
+			}
+			
+			.od_sureOrder button{
+				width: 6.88rem;
+				height: 2.34rem;
+				background: #1e8c5a;
+				border: none;
+				display: block;
+				text-align: center;
+				color: #fff;
+			}
+			.load_div{
+				position: absolute;
+				top: 40%;
+				left: 50%;
+			}
+			.od_dsn{
+				display: none;
+			}
+			@media only screen and  (min-width: 320px) and  (max-width: 480px) {
+			html{ 
+		       font-size: 17px;
+		    }
+		}
+		</style>
+	</head>
+
+	<body>
+		<div id="od_main">
+			<div class="od_schedule">
+				<div class="od_schedule_top">
+					<dl>
+						<dt class="fl">
+							<img src="assets/images/od_schedule.png" />
+						</dt>
+						<dd class="fl">
+							<p class="od_business">
+								已完成
+							</p>
+							<p class="od_time">预计送达：<span>12:00</span></p>
+						</dd>
+					</dl>
+				</div>
+					<div class="od_schedule_bottom">
+					
+						<div class="od_schedule_font">
+							<ul>
+								<li>已付款</li>
+								<li>商家已接单</li>
+								<li>确认送达</li>
+							</ul>
+						</div>
+					
+						<div class="od_schedule_font" style="display:none;">
+							<ul>
+								<li>待接单</li>
+								<li>商家已接单</li>
+								<li>确认送达</li>
+							</ul>
+						</div>
+						<div class="od_schedule_font"  style="display:none;">
+							<ul>
+								<li>已付款</li>
+								<li>商家已接单</li>
+								<li>确认送达</li>
+							</ul>
+						</div>
+						<div class="od_schedule_font" style="display:none;">
+							<ul>
+								<li>申请取消</li>
+								<li>店铺处理</li>
+								<li>订单取消</li>
+							</ul>
+						</div>
+					
+						<div class="od_schedule_line">
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<span class=""><i class="od_schedule_n od_bgg"></i></span>
+							<div class="od_line_left fl  od_bgg"></div>
+							<div class="od_line_right fr od_bgg"></div>
+						</div>
+						<div class="od_schedule_line"  style="display:none;">
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<span class=""><i class="od_schedule_n od_bgg"></i></span>
+							<span class=""><i class="od_schedule_n od_bgg"></i></span>
+							<div class="od_line_left fl  od_bgg"></div>
+							<div class="od_line_right fr od_bgg"></div>
+						</div>
+						<div class="od_schedule_line"  style="display:none;">
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<div class="od_line_left fl  od_bgg"></div>
+							<div class="od_line_right fr od_bgg"></div>
+						</div>
+						<div class="od_schedule_line" style="display:none;">
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<span class="od_schedule_y"><i class="od_schedule_n od_bgr"></i></span>
+							<div class="od_line_left fl  od_bgg"></div>
+							<div class="od_line_right fr od_bgg"></div>
+						</div>
+					
+				</div>
+			</div>
+			<div class="od_detail">
+				<div class="od_detail_top">
+					<div class="od_label">订单详情</div>
+					
+						<div class="od_meal_detail">
+							<div class="od_foodPic fl">
+							<img src="assets/images/img/1.png" />
+							</div>
+							<div class="od_foodDetail fl">
+								<p class="fl">熏鸡肉沙拉</p>
+								<p class="fl">X1</p>
+								<p class="fr">23</p>
+							</div>
+						</div>
+						
+				</div>
+				<div class="od_detail_mid">
+					<ul>
+						<li>
+							<p class="fl">配送费用</p>
+							<p class="fr">0元</p>
+						</li>
+						<li class="od_noborder">
+							<p class="fl">费用合计</p>
+							<p class="fr">23元</p>
+						</li>
+					</ul>
+				</div>
+				<div class="od_detail_bottom">
+					<p>配送地址：平西府尚硅谷it教育</p>
+					<p>收货电话：13111111111</p>
+				</div>
+			</div>
+			
+			<div class="od_footer">
+				<div class="od_tel fl">
+					<a href="tel:13111111111"><img src="assets/images/om_tel.png" /></a>
+				</div>
+				
+				<div data-state="<%=data.state%>" data-id="<%=data.id%>" class="od_backOrder fl">
+					退单
+				</div>
+
+				<div class="od_sureOrder fr" >
+					<button data-id="<%=data.id%>" class="od_sureOrder_btn">确认送达</button>
+				</div>
+			</div>
+			<div class="load_div od_dsn">
+				<img src="assets/images/load.gif" />
+			</div>
+		</div>
+	</body>
+</html>

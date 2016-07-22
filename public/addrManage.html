@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>收货地址管理</title>
+		<meta content="telephone=no" name="format-detection">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="on" http-equiv="cleartype">
+		<link rel="stylesheet" type="text/css" href="assets/css/1reset.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/2layout.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#addr_main {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.addr_util {
+				padding: 0 0 0 15px;
+			}
+			
+			.addr_title {
+				background-color: #282828;
+				height: 2.81rem;
+				line-height: 2.81rem;
+				text-align: center;
+				color: #fff;
+				font-size: 1.06rem;
+				position: relative;
+			}
+			
+			.addr_title span {
+				font-size: 1.06rem;
+				position: absolute;
+				left: 0;
+			}
+			
+			.addr_title span i {
+				width: 0.44rem;
+				height: 0.81rem;
+				background: url(assets/images/addr_prev.png) no-repeat;
+				background-size: 100%;
+				display: inline-block;
+				margin-right: 10px;
+			}
+			
+			.addr_addr {
+				height: 5.81rem;
+				background-color: #fff;
+				overflow: hidden;
+				margin-top: 5px;
+			}
+			
+			.addr_addr .addr_addr_left {
+				height: 5.81rem;
+				width: 80%;
+				/*232px*/
+				position: relative;
+			}
+			
+			.addr_addr .addr_addr_left div {
+				position: absolute;
+				top: 50%;
+				margin-top: -23px;
+			}
+			
+			.addr_name {
+				font-size: 1rem;
+				color: #333333;
+				line-height: 1.44rem;
+				font-weight: bold;
+			}
+			
+			.addr_name span {
+				padding-left: 20px;
+				font-weight: normal;
+			}
+			
+			.addr_name span,
+			.addr_addr_left_addr {
+				font-size: 0.8rem;
+				color: #999999;
+				margin-top: 0.3rem;
+			}
+			
+			.addr_addr_right {
+				border-left: 1px solid #f0f0f0;
+				width: 20%;
+			}
+			
+			.addr_addr_right div {
+				height: 2.94rem;
+				width: 4.44rem;
+				line-height: 2.94rem;
+				text-align: center;
+			}
+			
+			.addr_addr_right .addr_edit {
+				border-bottom: 1px solid #f0f0f0;
+			}
+			
+			.addr_addr_right i {
+				display: inline-block;
+			}
+			
+			.addr_addr_right .addr_edit i {
+				width: 1rem;
+				height: 1rem;
+				background: url(assets/images/addr_edit.png) no-repeat;
+				background-size: 100%;
+			}
+			
+			.addr_addr_right .addr_del i {
+				width: 0.81rem;
+				height: 1rem;
+				background: url(assets/images/addr_del.png) no-repeat;
+				background-size: 100%;
+			}
+			
+			#addr_addrList {
+				/*overflow: hidden;*/
+				margin-bottom: 3rem;
+			}
+			
+			.addr_addBtn {
+				width: 90%;
+				height: 2.81rem;
+				border: none;
+				line-height: 2.81rem;
+				text-align: center;
+				font-size: 1.19rem;
+				background: #eb3c3c;
+				color: #fff;
+				display: block;
+				margin: 0.2rem auto;
+			}
+			
+			.addr_addBtn_div {
+				width: 100%;
+				height: 3.3rem;
+				line-height: 3.3rem;
+				background: #fff;
+				position: fixed;
+				bottom: 0;
+				border-top: 1px solid #f0f0f0;
+			}
+			
+			@media only screen and (min-width: 320px) and (max-width: 480px) {
+				html {
+					font-size: 17px;
+				}
+			}
+		</style>
+	</head>
+
+	<body ng-app="amApp" ng-controller="AMController">
+		<div id="addr_main">
+			<div id="addr_addrList">
+				<div class="addr_addr addr_util" ng-repeat="addr in addressArr" >
+					<div class="addr_addr_left fl" ng-click="toOrder(addr)">
+						<div>
+							<p class="addr_name">
+								<span ng-bind="addr.contactor"></span>
+								<span class="addr_tel" ng-bind="addr.phone"></span>
+							</p>
+							<p class="addr_addr_left_addr" ng-bind="addr.address+addr.doorplate">
+								<!--"address": "龙隆昌科技楼"  "doorplate": "3层301"-->
+							</p>
+						</div>
+					</div>
+					<div class="addr_addr_right fr">
+						<div class="addr_edit" ng-click="toEditAddr($index)">
+							<i></i>
+						</div>
+						<div class="addr_del" ng-click="delAddr($index)">
+							<i></i>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="addr_addBtn_div">
+				<button class="btn addr_addBtn" ng-click="toAddAddr()">新增收货地址</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="assets/js/angular/angular-1.5.5.js"></script>
+	<script type="text/javascript">
+		angular.module('amApp', [])
+				.controller('AMController', function ($scope, $http) {
+
+					//得到session中的userId
+					var user = JSON.parse(sessionStorage.getItem('_user_'));
+					//ajax请求获取地址列表
+					$http.get('/getAddrsByUserId?userId='+user._id)
+							.success(function (result) {
+								$scope.addressArr = result.data;
+							})
+							.error(function (result) {
+								alert(result);
+							});
+
+					//修改地址的功能
+					$scope.toEditAddr = function (index) {
+						//要把对应的地址id 原来的数据存进session里面, 用于 addNewAddr.html页面的显示
+						var addrJson = JSON.stringify($scope.addressArr[index]);
+						sessionStorage.setItem('_edit_addr_', addrJson);
+
+						window.location = 'addNewAddr.html';
+					};
+
+					//删除地址
+					$scope.delAddr = function (index) {
+						if (confirm('您确定删除此地址吗?')){
+							$http.get('/deleteAddr?_id='+$scope.addressArr[index]._id)
+									.success(function (result) {
+										$scope.addressArr.splice(index, 1);
+										//alert('删除成功!');
+									})
+									.error(function (result) {
+										alert(result);
+									});
+						}
+
+					};
+
+					//跳转到新增地址页面
+					$scope.toAddAddr = function () {
+						window.location = 'addNewAddr.html';
+					};
+
+					//点击选择某地址后, 去下单
+					$scope.toOrder = function (address) {
+						//保存用户选择的该address 到 session中
+						sessionStorage.setItem('_address_', JSON.stringify(address));
+						//跳转到订单页面
+						window.location = 'orderConfirm.html';
+					}
+				});
+	</script>
+</html>

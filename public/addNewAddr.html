@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>新增收货地址</title>
+	<meta content="telephone=no" name="format-detection">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="black" name="apple-mobile-web-app-status-bar-style">
+	<meta content="on" http-equiv="cleartype">
+	<!--build:css inline  -->
+	<link rel="stylesheet" type="text/css" href="assets/css/1reset.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/2layout.css" />
+	<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+	<!-- /build -->
+	<style>
+		#ana_main {
+			width: 100%;
+			height: 100%;
+		}
+
+		.ana_linkman,
+		.ana_addr {
+			font-size: 0.88rem;
+			margin: 10px 0 5px 15px;
+			color: #969696;
+		}
+
+		.ana_fillin {
+			background-color: #fff;
+			width: 100%;
+			overflow: hidden;
+		}
+
+		.ana_fillin ul li {
+			line-height: 2.81rem;
+			width: 100%;
+			overflow: hidden;
+			height: 2.81rem;
+		}
+
+		.ana_fillin ul li p {
+			/*display: table-cell;*/
+		}
+
+		.ana_fillin ul li:nth-child(2) {
+			border-top: 1px solid #f0f0f0;
+			border-bottom: 1px solid #f0f0f0;
+		}
+
+		.ana_fillin ul li p:nth-child(1) {
+			width: 19%;
+			text-align: center;
+			border-right: 1px solid #f0f0f0;
+			height: 2.81rem;
+			font-size: 0.88rem;
+		}
+
+		.ana_fillin ul li input {
+			height: 2.81rem;
+			width: 100%;
+			border: none;
+			font-size: 0.85rem;
+			padding-left: 5px;
+		}
+
+		.ana_fillin ul li p:nth-child(2) {
+			width: 80%;
+			font-size: 0.88rem;
+		}
+
+		.ana_fillin ul li p i {
+			width: 0.81rem;
+			height: 0.81rem;
+			border: 1px solid #c8c8c8;
+			display: inline-block;
+			margin: -2px 5px;
+		}
+
+		.chooseBg {
+			background: url(assets/images/ca_choose.jpg) no-repeat;
+			background-size: 100%;
+		}
+
+		.ana_man {
+			margin-right: 15px;
+		}
+
+		.ana_addrDetail {
+			background: #fff;
+			overflow: hidden;
+			width: 100%;
+		}
+
+		.ana_addrDetail li {
+			overflow: hidden;
+			line-height: 2.81rem;
+			font-size: 0.88rem;
+			width: 100%;
+			height: 2.81rem;
+		}
+
+		.ana_addrDetail li:nth-child(1) {
+			border-bottom: 1px solid #f0f0f0;
+		}
+
+		.ana_addrDetail li div:nth-child(1) {
+			width: 45%;
+			border-right: 1px solid #f0f0f0;
+			text-align: right;
+			padding-right: 5%;
+			font-size: 0.88rem;
+		}
+
+		.ana_addrDetail li div:nth-child(2) {
+			width: 55%;
+		}
+
+		.ana_addrDetail i {
+			width: 0.625rem;
+			height: 1rem;
+			float: left;
+			display: inline-block;
+			background: url(assets/images/ana_search.png) no-repeat;
+			background-size: 100%;
+			margin: 0.9rem 0.4rem;
+
+		}
+
+		.ana_addrDetail input {
+			height: 2.81rem;
+			border: none;
+			width: 70%;
+			font-size: 0.85rem;
+		}
+
+		.ana_detailAddr {
+			margin-left: 10px;
+		}
+
+		.ana_btn {
+			width: 92%;
+			height: 2.81rem;
+			background: #eb3c3c;
+			margin: 0 auto;
+			display: block;
+			text-align: center;
+			color: #fff;
+			font-size: 1rem;
+			border: none;
+			margin-top: 20px;
+		}
+
+		.ana_btn:disabled {
+			background: #dddddd;
+		}
+
+		.errorMsg {
+			color: red;
+			margin-left: 270px;
+		}
+	</style>
+</head>
+
+<body ng-app="newAddrApp" ng-controller="newAddrContrl">
+	<div id="ana_main">
+		<form name="addrForm">
+			<p class="ana_linkman">联系人信息</p>
+			<div class="ana_fillin">
+				<ul>
+					<li>
+						<p class="fl">姓 名：</p>
+						<p class="fr">
+							<input type="text" maxlength="20" name="contactor" placeholder="请填写收货人的姓名"
+								   ng-model="address.contactor" ng-required="true" ng-pattern="/^.{2,}$/">
+						</p>
+					</li>
+					<li ng-show="addrForm.contactor.$dirty&&addrForm.contactor.$invalid"
+						ng-messages="addrForm.contactor.$error" ng-class="'errorMsg'">
+						<span ng-message="required" ng-bind="'收货人姓名不能为空!'"></span>
+						<span ng-message="pattern" ng-bind="'姓名至少2位'"></span>
+					</li>
+
+					<li>
+						<p class="fl">性 别：</p>
+						<p class="fr ana_sex">
+						<span class="ana_man" ng-click="setSex(1)">
+							<i data-sex="1" ng-class="{chooseBg :address.sex==1}"></i>男士
+						</span>
+						<span class="ana_girl" ng-click="setSex(2)">
+							<i data-sex="2" ng-class="{chooseBg :address.sex==2}"></i>女士
+						</span>
+						</p>
+					</li>
+
+					<li>
+						<p class="fl">手 机：</p>
+						<p class="fr">
+							<input type="text" name="phone" placeholder="请填写收货人的手机号"
+								   ng-model="address.phone" ng-required="true" ng-pattern="/^\d{11}$/">
+						</p>
+					</li>
+
+					<li ng-show="addrForm.phone.$dirty&&addrForm.phone.$invalid"
+						ng-messages="addrForm.phone.$error" ng-class="'errorMsg'">
+						<span ng-message="required" ng-bind="'手机号不能为空!'"></span>
+						<span ng-message="pattern" ng-bind="'手机号必须是11位数字'"></span>
+					</li>
+				</ul>
+			</div>
+
+			<p class="ana_addr">地址信息</p>
+			<div class="ana_addrDetail">
+				<ul>
+					<li>
+						<div class="fl">学校\大厦\写字楼:</div>
+						<div class="fr">
+							<i></i>
+							<input type="text" name="address" class="ana_searchAddr" placeholder="点击选择地址"
+							ng-model="address.address" ng-required="true" ng-click="toSearchAddress()">
+						</div>
+					</li>
+					<li ng-show="addrForm.address.$dirty&&addrForm.address.$invalid"
+						ng-messages="addrForm.address.$error" ng-class="'errorMsg'">
+						<span ng-message="required" ng-bind="'必须的'"></span>
+					</li>
+					<li>
+						<div class="fl">详细地址:</div>
+						<div class="fr">
+							<input type="text" class="ana_detailAddr" name="doorplate" placeholder="请填写门牌号"
+							ng-model="address.doorplate" ng-required="true">
+						</div>
+					</li>
+					<li ng-show="addrForm.doorplate.$dirty&&addrForm.doorplate.$invalid"
+						ng-messages="addrForm.doorplate.$error" ng-class="'errorMsg'">
+						<span ng-message="required" ng-bind="'必须的'"></span>
+					</li>
+				</ul>
+			</div>
+			<button class="ana_btn btn" ng-click="submit()" ng-bind="actionBtnText"
+			ng-disabled="addrForm.$invalid || !address.sex"></button>
+		</form>
+	</div>
+</body>
+<script type="text/javascript" src="assets/js/angular/angular-1.5.5.js"></script>
+<script type="text/javascript" src="assets/js/angular/angular-messages.js"></script>
+<script type="text/javascript">
+	angular.module('newAddrApp', ['ngMessages'])
+			.controller('newAddrContrl' , function ($scope, $http) {
+
+				//因为:　修改和新增地址都会跳转到此页面, 故要先做判断, 来决定此页面是否显示原来的数据
+				var editAddrJson = sessionStorage.getItem('_edit_addr_');
+				if (editAddrJson == null){  //说明是新增
+					$scope.actionBtnText = '保  存';
+					//从session读取出用户信息(json字符串格式), 并转换成js对象
+					var user = JSON.parse(sessionStorage.getItem('_user_'));
+					//封装一个address对象, 保存在$scope
+					$scope.address = {
+						userId : user._id  //查看API, 地址的数据中含有userId
+					};
+
+				}else{  //说明是修改
+					$scope.actionBtnText = '完成更新';
+					//把session中的地址数据显示在页面上
+					$scope.address = JSON.parse(editAddrJson);
+				}
+
+				//从session中取出_session_address_
+				var sessionAddrJson = sessionStorage.getItem('_session_address_');
+				if (sessionAddrJson != null){
+					var sessionAddress = JSON.parse(sessionAddrJson);
+					//保存到$scope  从..拷贝到..  把sessionAddress中的数据塞到$scope.address中
+					angular.copy(sessionAddress, $scope.address);
+
+				}
+
+
+				//从session中取出_search_address_
+				var searchAddressJson = sessionStorage.getItem('_search_address_');
+				if(searchAddressJson != null){  //说明用户点击过获取地址
+					var searchaddr = JSON.parse(searchAddressJson);
+					//保存到$scope
+					$scope.address.address = searchaddr.name;
+					$scope.address.lng = searchaddr.lng;
+					$scope.address.lat = searchaddr.lat;
+					$scope.address.cityId = searchaddr.cityId;
+
+				}
+
+				//添加一个方法设置性别
+				$scope.setSex = function (value) {
+					$scope.address.sex = value;
+				};
+
+				$scope.submit = function () {
+					//删除session中的地址
+					sessionStorage.removeItem('_session_address_');
+					sessionStorage.removeItem('_search_address_');
+
+
+					if (editAddrJson == null){  //新增
+						$http({
+							method: 'GET',
+							url: '/insertAddr',
+							params: {address: $scope.address}
+						}).success(function (address) {
+							alert('添加成功!');
+							window.location = 'addrManage.html';
+						}).error(function (result) {
+							alert(result);
+						});
+
+					}else{
+						$http({
+							method: 'GET',
+							url: '/updateAddr',
+							params: {address: $scope.address}
+						}).success(function (result) {
+							alert('修改成功!');
+							//把原来的session中的地址数据删除
+							sessionStorage.removeItem('_edit_addr_');
+							window.location = 'addrManage.html';
+
+						}).error(function (result) {
+							alert(result);
+						});
+					}
+				};
+
+				//点击获取地址
+				$scope.toSearchAddress = function () {
+					//将scope中的address保存到session
+					sessionStorage.setItem('_session_address_', JSON.stringify($scope.address));
+
+					window.location = 'chooseCoordinate.html';
+				};
+
+
+
+			});
+</script>
+</html>

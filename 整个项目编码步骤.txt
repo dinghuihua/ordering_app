@@ -1,0 +1,38 @@
+----------------------------------------以下是整个项目开发总体思路和步骤-------------------------
+
+dao: -- > data access object 数据访问对象
+
+项目步骤:
+一. 用户模块
+(一. 前台部分)
+
+(二. 后台部分)
+    1.建立各个文件,做好关系的引用
+    2.写connection.js并测试
+    3.在app.js中设置项目启动时连接,项目关闭时关闭连接
+    4. 分别写user_dao.js, feedback_dao.js  同时需要做测试
+    5. 写gb.js, 集中管理各个dao中的各个方法
+    6. 实现config.js的编码
+    7. 实现分路由user.js的编码
+
+二. 地址模块
+(一)地址模块的后台
+1. 完成address_dao.js的编码和测试
+       * 引入connection.js
+       * mongoose
+       * Schema-->addressSchema
+       * AddressModel--->addressModel
+
+       * getAddrsByUserId(userId, cb)
+       * addAddr(address, cb)
+       * updateAddr(address, cb)
+       * deleteAddrById(id, cb)
+
+2. 完成gb.js
+3. 完成address.js
+
+(二). 地址模块的前台
+页面: addrManage.html
+    ajax请求获取地址列表数据 /getAddrsByUserId
+页面: addNewAddr.html
+

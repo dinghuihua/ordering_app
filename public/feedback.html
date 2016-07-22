@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>意见反馈</title>
+		<meta content="telephone=no" name="format-detection">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="on" http-equiv="cleartype">
+		
+		<link rel="stylesheet" type="text/css" href="assets/css/1reset.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/2layout.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+	
+		<style>
+			body {
+				margin: 0 auto;
+			}
+			
+			.nv_main {
+				font-size: 1rem;
+				padding-left: 5%;
+				padding: 1rem 5%;
+			}
+			
+			.st_com {
+				width: 98%;
+				margin: 0 auto;
+			}
+			
+			textarea {
+				width: 99%;
+				height: 12rem;
+				border: none;
+				padding: 1rem 0 0 1%;
+			}
+			
+			button {
+				width: 92%;
+				height: 3rem;
+				line-height: 3rem;
+				color: #fff;
+				border: none;
+				display: block;
+				text-align: center;
+				margin: 1rem auto;
+				background: #FF2A2A;
+				font-size: 1.3rem;
+			}
+			.fb_btn:disabled{
+				background-color: #ccc;
+			}
+		</style>
+	</head>
+
+	<body ng-app="feedApp" ng-controller="FeedContrl">
+		<nav class="nav_com">
+			<div class="nv_main">描述</div>
+		</nav>
+		<section class="section_com">
+			<div class="st_com">
+				<textarea class="fb_val" placeholder="请尽情说出你的不愉快，我们一定改进"
+						  ng-model="feedback.content" name="fbTextarea" ng-minlength="15"></textarea>
+			</div>
+			<!--错误信息-->
+			<div ng-messages="fbTextarea.$error" ng-show="fbTextarea.$dirty&&fbTextarea.$invalid">
+				<span ng-message="minlength" ng-bind="'请至少输入15个字符'"></span>
+			</div>
+		</section>
+		<footer class="footer_com">
+			<button class="fb_btn btn" ng-click="submit()" ng-disabled="fbTextarea.$invalid">提交</button>
+		</footer>
+	</body>
+	<script type="text/javascript" src="assets/js/angular/angular-1.5.5.js"></script>
+	<script type="text/javascript" src="assets/js/angular/angular-messages.js"></script>
+	<script type="text/javascript">
+		angular.module('feedApp', ['ngMessages'])
+				.controller('FeedContrl' , function ($scope, $http) {
+					//从session读取出用户信息(json字符串格式), 并转换成js对象
+					var user = JSON.parse(sessionStorage.getItem('_user_'));
+					//封装一个feedback对象, 保存在$scope
+					$scope.feedback = {
+						user_id : user._id,
+						phone: user.phone
+					};
+
+					$scope.submit = function () {
+						//提交对 http://localhost:5000/feedback的ajax请求
+						$http({
+							method: 'GET',
+							//url: 'http://localhost:5000/feedback',
+							url: '/feedback',
+							params: { data: $scope.feedback }
+							//将对象作为一个请求参数的value, 参数名是data -->
+							// 并且是get请求, 服务器端通过data得到的就是一个json字符串
+						})
+								.success(function (result) {
+									alert('吐槽成功!');
+									window.location = 'personalCenter.html';
+								})
+								.error(function (result) {
+									alert(result);
+								})
+					};
+
+
+				});
+	</script>
+</html>

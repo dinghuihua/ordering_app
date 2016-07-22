@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<meta content="telephone=no" name="format-detection">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta content="on" http-equiv="cleartype">
+		<!--build:css inline  -->
+		<link rel="stylesheet" type="text/css" href="assets/css/1reset.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/2layout.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/common.css" />
+		<!-- /build -->
+		<style>
+			#pc_main {
+				width: 100%;
+				height: 100%;
+			}
+			
+			.pc_banner {
+				width: 100%;
+				/*height: 7.5rem;*/
+				/*background: url(assets/images/pc_banner.jpg) no-repeat;*/
+				/*background-size: 100%;*/
+				position: relative;
+				font-size: 0.86rem;
+				color: #fff;
+				text-align: center;
+			}
+			
+			.pc_banner p {
+				position: absolute;
+				bottom: 20px;
+				left: 35%;
+			}
+			
+			.pc_list {
+				width: 97%;
+				margin: 0 auto;
+				background-color: #fff;
+			}
+			
+			.pc_list li {
+				line-height: 55px;
+				border-bottom: 1px solid #f0f0f0;
+			}
+			
+			.pc_list li span {
+				font-size: 1rem;
+			}
+			
+			.pc_list ul li i {
+				margin: -4px 5px;
+				width: 1.13rem;
+				display: inline-block;
+				background-size: 100%;
+			}
+			
+			.pc_addr i {
+				background: url(assets/images/pc_icon.png) no-repeat;
+				background-position: 0 -2.94rem;
+				height: 1.38rem;
+			}
+			
+			.pc_myorder {
+				background: url(assets/images/pc_icon.png) no-repeat;
+				background-position: 0 0.125rem;
+				height: 1.38rem;
+			}
+			
+			.pc_opinion {
+				background: url(assets/images/pc_icon.png) no-repeat;
+				background-position: 0 -5.94rem;
+				height: 1.38rem;
+			}
+			
+			.pc_coupon {
+				background: url(assets/images/pc_icon.png) no-repeat;
+				background-position: 0 -9rem;
+				height: 1.38rem;
+			}
+		</style>
+	</head>
+
+	<body ng-app="personalApp" ng-controller="PersonalController">
+		<div class="pc_main" >
+			<div class="pc_banner">
+				<img src="assets/images/pc_banner.png" />
+				<p class="pc_mobielPhoe" ng-bind="'您好,' + user.phone"></p>
+			</div>
+			<div class="pc_list">
+				<ul>
+					<li class="pc_orderList" ng-click="toMyOrder()">
+						<i class="pc_myorder"></i>
+						<a href="javascript:"><span>我的订单</span></a>
+					</li>
+					<li class="pc_addr">
+						<i></i>
+						<a href="addrManage.html"><span>地址管理</span></a>
+					</li>
+					<li class="pc_feedBack" ng-click="toFeedback()">
+						<i class="pc_opinion"></i>
+						<a href="feedback.html"><span>意见反馈</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="assets/js/angular/angular-1.5.5.js"></script>
+	<script type="text/javascript">
+		angular.module('personalApp' , [])
+				.controller('PersonalController', function ($scope) {
+					//读取session中的user
+					var userJson = sessionStorage.getItem('_user_');
+					//如果为null,(还没登录) 提示转向到login
+					if (userJson == null){
+						alert('请先登录');
+						window.location = 'login.html';
+					}else{
+						//否则 显示
+						$scope.user = angular.fromJson(userJson);  //把json字符串userJson 转化成js对象
+					}
+					//进入意见反馈界面
+					$scope.toFeedback = function () {
+						window.location = 'feedback.html';
+					};
+
+					//进入我的订单页面
+					$scope.toMyOrder = function () {
+						window.location.href = '/order/orderList?userId='+ $scope.user._id;
+					};
+				})
+	</script>
+</html>

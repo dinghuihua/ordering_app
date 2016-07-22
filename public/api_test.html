@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>API测试页面</h1>
+<p><a href="/login?phone=13716962779">1. 登陆</a></p>
+<p><a href="/feedback?data=%7B%22user_id%22:%22576bbe0aa1d183c42c06c08e%22,%22phone%22:%2213716962779%22,%22content%22:%22%E4%B8%8D%E9%94%99%E4%B8%8D%E9%94%99!%22%7D">2. 提交意见反馈</a></p>
+<p><a href="/insertAddr?address=%7B%22userId%22:%22576bbe0aa1d183c42c06c08e%22,%22lat%22:39.99392711698915,%22lng%22:116.32432928208593,%22cityId%22:113,%22contactor%22:%22%E5%BC%A0%E6%99%93%E9%A3%9E%22,%22sex%22:1,%22phone%22:%2213716962779%22,%22address%22:%22%E9%BE%99%E9%9A%86%E6%98%8C%E7%A7%91%E6%8A%80%E6%A5%BC%22,%22doorplate%22:%223%E5%B1%82301%22%7D">3. 添加地址</a></p>
+<p><a href="/insertAddr?address=%7B%22userId%22:%22576bbe0aa1d183c42c06c08e%22,%22lat%22:39.994804625178226,%22lng%22:116.32785962274014,%22cityId%22:113,%22contactor%22:%22%E9%98%AE%E6%99%93%E8%8F%B2%22,%22sex%22:2,%22phone%22:%2215010176627%22,%22address%22:%22%E4%B8%AD%E5%85%B3%E6%9D%911%E5%8F%B7%E6%A5%BC%22,%22doorplate%22:%223%E5%B1%82301%22%7D">3. 添加地址2</a></p>
+<p><a href="/getAddrsByUserId?userId=576bbe0aa1d183c42c06c08e">4. 查找某个用户对应的地址列表</a></p>
+<p><a href="/getAddrById?_id=576bc242b20ba0b02ed9c5cc">5. 通过地址id查询对应地址</a></p>
+<p><a href="/updateAddr?address=%7B%22_id%22:%22576bc242b20ba0b02ed9c5cc%22,%22userId%22:%22576bbe0aa1d183c42c06c08e%22,%22lat%22:39.99565448448077,%22lng%22:116.32219131497217,%22cityId%22:113,%22contactor%22:%22%E5%BC%A0%E6%99%93%E9%A3%9E22%22,%22sex%22:%221%22,%22phone%22:%2213716962779%22,%22address%22:%22%E5%93%81%E7%89%8C%E5%88%9B%E6%96%B0%E7%A0%94%E7%A9%B6%E6%89%80%22,%22doorplate%22:%223%E5%B1%82301%22,%22state%22:%221%22,%22__v%22:0%7D">6. 更新地址</a></p>
+<p><a href="/deleteAddr?_id=576bc242b20ba0b02ed9c5cc">7. 删除某个地址(北京资源宾馆)</a></p>
+<p><a href="/index/data">8. 获取首页数据</a></p>
+<p><a href="/index/banners">9. 获取首页轮播图列表数据</a></p>
+<p><a href="/order/createOrder?order=%7B%22user_id%22:%22576bbe0aa1d183c42c06c08e%22,%22contactor%22:%22%E5%BC%A0%E6%99%93%E9%A3%9E%22,%22address%22:%22%E9%BE%99%E9%9A%86%E6%98%8C%E7%A7%91%E6%8A%80%E6%A5%BC%22,%22phone%22:%2213716962779%22,%22total_money%22:56,%22doorplate%22:%223%E5%B1%82301%22,%22remark%22:%22%E5%8A%A0%E4%B8%80%E4%BB%BD%E7%B1%B3%E9%A5%AD%22,%22arrive_time%22:%222016-6-23+20:14%22,%22detail%22:%22%7B%5C%22data%5C%22:%5B%7B%5C%22rstId%5C%22:1772,%5C%22money%5C%22:56,%5C%22meals%5C%22:%5B%7B%5C%22mealName%5C%22:%5C%22%E8%97%9C%E9%BA%A6%E7%89%9B%E6%B2%B9%E6%9E%9C%E6%B2%99%E6%8B%89%5C%22,%5C%22pictures%5C%22:%5C%22%252Fsource%252Fassets%252Fimages%252Fimg%252F3.png%5C%22,%5C%22num%5C%22:1,%5C%22price%5C%22:%5C%2223%5C%22%7D,%7B%5C%22mealName%5C%22:%5C%22%E7%89%9B%E6%B2%B9%E6%9E%9C%E4%B8%89%E6%96%87%E9%B1%BC%E6%B2%99%E6%8B%89%5C%22,%5C%22pictures%5C%22:%5C%22%252Fsource%252Fassets%252Fimages%252Fimg%252F5.png%5C%22,%5C%22num%5C%22:1,%5C%22price%5C%22:%5C%2233%5C%22%7D%5D%7D%5D%7D%22%7D">10. 生成订单</a></p>
+<p><a href="/order/detail/576bc5adb20ba0b02ed9c5d0">11. 显示订单详情</a></p>
+<p><a href="/order/orderList?userId=576bbe0aa1d183c42c06c08e">12. 查询某个用户所有的订单列表</a></p>
+<p><a href="/order/getNewestAddress?userId=576bbe0aa1d183c42c06c08e">13. 根据用户ID查询其默认的地址</a></p>
+
+<br>
+<br>
+<h2>测试请求参数</h2>
+<div ng-app="myApp" ng-controller="MyController">
+    <button ng-click="test1()">测试1(对象作为请求参数)</button><br>
+    <button ng-click="test2()">测试2(对象作为请求参数的value)</button><br>
+    <button ng-click="test3()">测试3(对象作为请求参数+headers)</button><br>
+    <button ng-click="test4()">测试4(对象作为请求参数的value+headers)</button><br>
+</div>
+
+</body>
+<script type="text/javascript" src="assets/js/angular.js"></script>
+<script type="text/javascript">
+    angular.module('myApp',[])
+            .controller('MyController', function($scope, $http){
+                $scope.user = {name:'Tom', age:12};
+
+                $scope.test1 = function () {
+                    $http({
+                        method : 'POST',
+                        url : '/test',
+                        data : $scope.user    //情况一: 将对象作为参数---分解--->name=tom&age=12
+                    })
+                            .success(function (result) {
+
+                            })
+                            .error(function (result) {
+                            });
+                };
+
+                $scope.test2 = function () {
+                    $http({
+                        method : 'POST',
+                        url : '/test',
+                        data : {data:$scope.user, yyy: 'aaaa'},
+                        //情况二: 将对象作为一个请求参数的value
+                        //POST--- 分析封装成对象
+                        //GET---- json字符串
+                    })
+                            .success(function (result) {
+
+                            })
+                            .error(function (result) {
+                            });
+                };
+
+                //情况三: 一旦加了headers, 不让angular帮我们解析参数对象数据, 只能手动拼: a=xxx&b=yyy
+                $scope.test3 = function () {
+                    $http({
+                        method : 'POST',
+                        url : '/test',
+                        data : $scope.user,
+                        headers :  {      //跨域请求时才必须用
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    })
+                            .success(function (result) {
+
+                            })
+                            .error(function (result) {
+                            });
+                };
+
+                $scope.test4 = function () {
+                    $http({
+                        method : 'POST',
+                        url : '/test',
+                        data : {data : $scope.user},
+                        headers :  {      //跨域请求时才必须用
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    })
+                            .success(function (result) {
+
+                            })
+                            .error(function (result) {
+                            });
+                };
+
+            });
+</script>
+</html>

@@ -1,0 +1,74 @@
+/* module: 布局 */
+.table{
+  display: table;
+}
+.row{
+  display: table-row;
+}
+.cell{
+  display: table-cell;
+  vertical-align: top;
+}
+
+.d-inline-block{
+  display: inline-block;
+}
+
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.mt0{
+  margin-top: 0;
+}
+.mt5{
+  margin-top: 5px;
+}
+.mt10{
+  margin-top: 10px;
+}
+.mt20{
+  margin-top: 20px;
+}
+.mt50{
+  margin-top: 50px;
+}
+.ml2{
+  margin-left: 2px;
+}
+.ml5{
+  margin-left: 5px;
+}
+.ml10{
+  margin-left: 10px;
+}
+.ml20{
+  margin-left: 20px;
+}
+.mr10{
+  margin-right: 10px;
+}
+.p10{
+  padding: 10px;
+}
+.pl10{
+  padding-left: 10px;
+}
+.ptb10{
+  padding-top:10px;
+  padding-bottom: 10px; 
+}
+.pb10{
+  padding-bottom: 10px;
+}
+.w50{
+  width: 50%
+}
+.w100{
+  width: 100%;
+}
+.hide{
+  display: none;
+}

@@ -1,0 +1,11 @@
+{
+  "_id": {
+    "$oid": "57624634edb35fb81e258e34"
+  },
+  "user_id": "57623dd0a20d4fc41cb26d53",
+  "phone": "15611111111",
+  "content": "have a good day",
+  "create_time": {
+    "$date": "2016-06-16T14:24:52.070+0800"
+  }
+}
